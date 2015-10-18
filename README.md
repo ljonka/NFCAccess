@@ -15,9 +15,13 @@ cd NFCAccess
 git submodule update --init --recursive
 </pre>
 
-<h2>Compile for particle</h2>
+<h2>Compile or flash for particle photon</h2>
 
+<h3>Compile and download bin</h3>
 <pre>particle compile photon .</pre>
+
+<h3>Compile and flash</h3> 
+<pre>particle flash <device id> .</pre>
 
 
 
