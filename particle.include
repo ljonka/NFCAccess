@@ -1,0 +1,8 @@
+nfcaccess.ino
+lib/MFRC522_RFID_Library/firmware/*.cpp
+lib/MFRC522_RFID_Library/firmware/*.h
+lib/sd-card-library/firmware/*.cpp
+lib/sd-card-library/firmware/*.h
+lib/SparkJson/firmware/*.cpp
+lib/SparkJson/firmware/*.h
+
