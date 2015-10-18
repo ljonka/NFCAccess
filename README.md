@@ -44,7 +44,7 @@ git submodule update --init --recursive
 <tr>
 <tr>
 	<td>A1</td>
-	<td></td>
+	<td>8 (SDA)</td>
 	<td></td>
 	<td></td>
 	<td></td>
@@ -60,7 +60,7 @@ git submodule update --init --recursive
 <tr>
 <tr>
 	<td>A3</td>
-	<td></td>
+	<td>7 (SCK)</td>
 	<td></td>
 	<td></td>
 	<td></td>
@@ -68,7 +68,7 @@ git submodule update --init --recursive
 <tr>
 <tr>
 	<td>A4</td>
-	<td></td>
+	<td>5 (MISO)</td>
 	<td></td>
 	<td></td>
 	<td></td>
@@ -76,7 +76,7 @@ git submodule update --init --recursive
 <tr>
 <tr>
 	<td>A5</td>
-	<td></td>
+	<td>6 (MOSI)</td>
 	<td></td>
 	<td></td>
 	<td></td>
@@ -100,7 +100,7 @@ git submodule update --init --recursive
 <tr>
 <tr>
 	<td>D2</td>
-	<td></td>
+	<td>2 (RST)</td>
 	<td></td>
 	<td></td>
 	<td></td>
@@ -132,7 +132,7 @@ git submodule update --init --recursive
 <tr>
 <tr>
 	<td>3,3V</td>
-	<td></td>
+	<td>1 (3,3V)</td>
 	<td></td>
 	<td></td>
 	<td></td>
@@ -140,8 +140,8 @@ git submodule update --init --recursive
 <tr>
 <tr>
 	<td>GND</td>
-	<td></td>
-	<td></td>
+	<td>3 (GND)</td>
+	<td>1 (GND)</td>
 	<td></td>
 	<td></td>
 	<td></td>
@@ -149,7 +149,7 @@ git submodule update --init --recursive
 <tr>
 	<td>VIN(5V)</td>
 	<td></td>
-	<td></td>
+	<td>2 (VCC)</td>
 	<td></td>
 	<td></td>
 	<td></td>
