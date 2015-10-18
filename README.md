@@ -23,6 +23,140 @@ git submodule update --init --recursive
 <h3>Compile and flash</h3> 
 <pre>particle flash <device id> .</pre>
 
+<h2>Wiring</h2>
+
+<table>
+<tr>
+	<td>Particle Photon</td>
+	<td>MFRC522</td>
+	<td>MicroSD Card Adapter</td>
+	<td>Taster</td>
+	<td>Relais Module</td>
+	<td>Resistor</td>
+<tr>
+<tr>
+	<td>A0</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+<tr>
+<tr>
+	<td>A1</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+<tr>
+<tr>
+	<td>A2</td>
+	<td></td>
+	<td>6 (CS)</td>
+	<td></td>
+	<td></td>
+	<td></td>
+<tr>
+<tr>
+	<td>A3</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+<tr>
+<tr>
+	<td>A4</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+<tr>
+<tr>
+	<td>A5</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+<tr>
+<tr>
+	<td>D0</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+<tr>
+<tr>
+	<td>D1</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+<tr>
+<tr>
+	<td>D2</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+<tr>
+<tr>
+	<td>D3</td>
+	<td></td>
+	<td>5 (SCK)</td>
+	<td></td>
+	<td></td>
+	<td></td>
+<tr>
+<tr>
+	<td>D4</td>
+	<td></td>
+	<td>3 (MISO)</td>
+	<td></td>
+	<td></td>
+	<td></td>
+<tr>
+<tr>
+	<td>D5</td>
+	<td></td>
+	<td>4 (MOSI)</td>
+	<td></td>
+	<td></td>
+	<td></td>
+<tr>
+<tr>
+	<td>3,3V</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+<tr>
+<tr>
+	<td>GND</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+<tr>
+<tr>
+	<td>VIN(5V)</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+<tr>
+
+</table>
+
 
 
 
