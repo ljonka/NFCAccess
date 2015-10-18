@@ -19,14 +19,9 @@
    
 */
 
-// This #include statement was automatically added by the Particle IDE.
-#include "SparkJson.h"
-
-// This #include statement was automatically added by the Particle IDE.
-#include "sd-card-library-photon-compat.h"
-
-// This #include statement was automatically added by the Particle IDE.
-#include "MFRC522.h"
+#include "SparkJson.h" //json lib
+#include "sd-card-library-photon-compat.h" //sd-card lib
+#include "MFRC522.h" //rfid lib
 
 //include random number generator from stm32 lib
 #include "stm32f2xx_rng.h"
@@ -51,6 +46,7 @@ MFRC522 mfrc522(SS_PIN, RST_PIN);        // Create MFRC522 instance.
 File myFile;
 MFRC522::MIFARE_Key key;
 
+//make functions available
 bool nfcScanCard();
 bool nfcAuthKeys();
 bool nfcCheckPiccType();
@@ -61,10 +57,8 @@ void openDoor();
 void checkTaster();
 
 // In this sample we use the second sector (ie block 4-7). the first sector is = 0
-// scegliere settore di lettura da 0 = primo settore 
 byte sector         = 1;
 // block sector 0-3(sector0) 4-7(sector1) 8-11(sector2)
-// blocchi di scrittura da 0-3(sector0) 4-7(sector1) 8-11(sector2)
 byte valueBlockA    = 4;
 byte trailerBlock   = 7;
 byte status;
@@ -74,10 +68,11 @@ String fileLog = "log.txt";
 String weekDays[7] = {"sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"};
 int userAuthStatus = 0;
 
+//timout var counter for door access
 unsigned long previousMillis = 0;
-const int doorPin =  D0;      // the number of the LED pin
-const int tasterPin =  D1;      // the number of the LED pin
-const long interval = 2000;           // interval at which to blink (milliseconds)
+const int doorPin =  D0;      // number of relais pin
+const int tasterPin =  D1;      //number of taster pin - used to open door from inside
+const long interval = 2000;     // interval how long door will be opened
 bool openDoorCommand = false;
 
 void setup() {
@@ -86,10 +81,10 @@ void setup() {
 
 	mfrc522.PCD_Init();        // Init MFRC522 card
 	
-	// Initialize SOFTWARE SPI
+	// Initialize SOFTWARE SPI, save status of sd init for later
     if (!SD.begin(mosiPin, misoPin, clockPin, chipSelect)) {
         Serial.println("initialization failed!");
-        sdStatus = false;
+        sdStatus = false;	
     }else{
         sdStatus = true;
     }
@@ -379,12 +374,11 @@ int cloudUpdateKey(String command){
         return -1;
     }
     
-    //char id[sizeof(root["i"]) / sizeof(root["i"][0])];
-    //strcpy(id, root["i"]);
     int id;
     bool userFound = false;
     bool firstUser = true;
     const char* charUid = root["u"];
+    //search next available id or update if user found
     for(id = 0; id < 100; id++){
          //read existing data from file
         myFile = SD.open(String(id));
@@ -412,14 +406,11 @@ int cloudUpdateKey(String command){
 		break;
 	}
     }
-
-    Serial.println("Die aktuelle Zahl ist:");
-    Serial.println(id);
     
     String fileName = String(id);
     char charFile[fileName.length() + 1];
     fileName.toCharArray(charFile, fileName.length() + 1);
-    SD.remove(charFile); //rewrite file
+    SD.remove(charFile); //rewrite file if user exists
     if(firstUser)
 	id = 0;
 	    
