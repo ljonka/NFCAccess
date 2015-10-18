@@ -157,6 +157,15 @@ git submodule update --init --recursive
 
 </table>
 
+<h3>Hardware list</h3>
+<ul>
+	<li>Particle Photon STM32F2</li>
+	<li>RFID-RF522 MFRC522</li>
+	<li>MicroSD Card Adapter Catalex</li>
+	<li>1,5MOhm Resistor</li>
+	<li>Taster</li>	
+</ul>
+
 
 
 
