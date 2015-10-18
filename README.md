@@ -87,16 +87,16 @@ git submodule update --init --recursive
 	<td></td>
 	<td></td>
 	<td></td>
-	<td></td>
+	<td>3 (IN)</td>
 	<td></td>
 <tr>
 <tr>
 	<td>D1</td>
 	<td></td>
 	<td></td>
+	<td>2</td>
 	<td></td>
-	<td></td>
-	<td></td>
+	<td>2</td>
 <tr>
 <tr>
 	<td>D2</td>
@@ -136,14 +136,14 @@ git submodule update --init --recursive
 	<td></td>
 	<td></td>
 	<td></td>
-	<td></td>
+	<td>1</td>
 <tr>
 <tr>
 	<td>GND</td>
 	<td>3 (GND)</td>
 	<td>1 (GND)</td>
-	<td></td>
-	<td></td>
+	<td>1</td>
+	<td>2 (GND)</td>
 	<td></td>
 <tr>
 <tr>
@@ -151,7 +151,7 @@ git submodule update --init --recursive
 	<td></td>
 	<td>2 (VCC)</td>
 	<td></td>
-	<td></td>
+	<td>1 (VCC)</td>
 	<td></td>
 <tr>
 
