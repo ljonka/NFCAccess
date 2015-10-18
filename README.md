@@ -162,8 +162,10 @@ git submodule update --init --recursive
 	<li>Particle Photon STM32F2</li>
 	<li>RFID-RF522 MFRC522</li>
 	<li>MicroSD Card Adapter Catalex</li>
-	<li>1,5MOhm Resistor</li>
 	<li>Taster</li>	
+	<li>Relais Module SRD-05VDC-SL-C</li>	
+	<li>1,5MOhm Resistor</li>
+	
 </ul>
 
 
