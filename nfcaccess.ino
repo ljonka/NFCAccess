@@ -241,7 +241,7 @@ bool nfcAuthKeys(){
 int fileAuthUid(String uid){
     int id;
     DynamicJsonBuffer jsonBuffer;
-    for(id = 0; id < 100; id++){
+    for(id = 0; id < 1000; id++){
          //read existing data from file
         myFile = SD.open(String(id));
         String command = "";
@@ -362,7 +362,7 @@ bool fileWriteLog(String command){
         Serial.println("error opening fileLog");
     }
 }
-int cloudUpdateKey(String command){
+int cloudUpdateKey(String command){    
     //Convert cloud param to json
     DynamicJsonBuffer jsonBuffer;
     char json[command.length() + 1];
@@ -379,7 +379,7 @@ int cloudUpdateKey(String command){
     bool firstUser = true;
     const char* charUid = root["u"];
     //search next available id or update if user found
-    for(id = 0; id < 100; id++){
+    for(id = 0; id < 1000; id++){
          //read existing data from file
         myFile = SD.open(String(id));
         String command = "";
@@ -416,7 +416,7 @@ int cloudUpdateKey(String command){
 	    
     myFile = SD.open(String(id), FILE_WRITE);
     // if the file opened okay, write to it:
-    if (myFile) {
+    if (myFile && sdStatus) {
         Serial.print("Writing uid file");
         root.printTo(myFile);
         // close the file:
