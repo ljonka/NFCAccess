@@ -20,7 +20,7 @@
 */
 
 #include "SparkJson.h" //json lib
-#include "sd-card-library-photon-compat.h" //sd-card lib
+#include "SdFat.h" //sd-card lib
 #include "MFRC522.h" //rfid lib
 
 //include random number generator from stm32 lib
@@ -35,14 +35,12 @@
 // SOFTWARE SPI pin configuration - modify as required
 // The default pins are the same as HARDWARE SPI
 //VCC should be 5V, 3.3V was not suficient!
-const uint8_t chipSelect = A2;    // Also used for HARDWARE SPI setup
-const uint8_t mosiPin = D5;
-const uint8_t misoPin = D4;
-const uint8_t clockPin = D3;
+#define SD_CS A2    // Also used for HARDWARE SPI setup
 
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);        // Create MFRC522 instance.
 
+SdFat SD(1);
 File myFile;
 MFRC522::MIFARE_Key key;
 
@@ -50,7 +48,7 @@ MFRC522::MIFARE_Key key;
 bool nfcScanCard();
 bool nfcAuthKeys();
 bool nfcCheckPiccType();
-int cloudUpdateKey();
+int cloudUpdateKey(String);
 bool fileWriteLog(String);
 int fileAuthUid(String);
 void openDoor();
@@ -82,7 +80,7 @@ void setup() {
 	mfrc522.PCD_Init();        // Init MFRC522 card
 	
 	// Initialize SOFTWARE SPI, save status of sd init for later
-    if (!SD.begin(mosiPin, misoPin, clockPin, chipSelect)) {
+    if (!SD.begin(SD_CS)) {
         Serial.println("initialization failed!");
         sdStatus = false;	
     }else{
@@ -111,6 +109,8 @@ void loop() {
     checkTaster();
     if(!nfcScanCard()){
         mfrc522.PICC_HaltA();
+        //Serial.println("Scanning...");
+        delay(200);
         return;
     }
     // Now a card is selected. The UID and SAK is in mfrc522.uid.
@@ -241,9 +241,8 @@ bool nfcAuthKeys(){
 int fileAuthUid(String uid){
     int id;
     DynamicJsonBuffer jsonBuffer;
-    for(id = 0; id < 1000; id++){
          //read existing data from file
-        myFile = SD.open(String(id));
+        myFile = SD.open(uid);
         String command = "";
         char character;
         if (myFile) {
@@ -258,11 +257,6 @@ int fileAuthUid(String uid){
             return 0; //no file found, end of user search..
         }
         
-        if(command == "") continue; //goto next user
-        
-        //fast search by string.indexOf(), jump over if not in string
-        if(command.indexOf(uid) == -1) continue;
-        
         //debug only!
         Serial.println(command);
         
@@ -273,11 +267,10 @@ int fileAuthUid(String uid){
         
         if (!root.success()) {
             //Serial.println("parseObject() failed");
-            continue;//goto next user
+            return 0;//goto next user
         }
         //compare uid
-        if(!uid.equals(root["u"])) continue; //goto next user
-        
+        if(!uid.equals(root["u"])) return 0; //goto next user
         
         //compare time
         int currentWeekDay = Time.weekday();
@@ -332,7 +325,7 @@ int fileAuthUid(String uid){
 	    SD.remove(charFile); //rewrite file
 	    
 	    myFile = SD.open(String(id), FILE_WRITE);
-	    if (myFile) {
+	if (myFile) {
             root.printTo(myFile);
             // close the file:
             myFile.close();
@@ -342,8 +335,6 @@ int fileAuthUid(String uid){
             Serial.println("error opening uid file");
             return 1;
         }
-    }
-    return 0;
 }
 bool fileWriteLog(String command){
     // open the file. note that only one file can be open at a time,
@@ -378,43 +369,11 @@ int cloudUpdateKey(String command){
     bool userFound = false;
     bool firstUser = true;
     const char* charUid = root["u"];
-    //search next available id or update if user found
-    for(id = 0; id < 1000; id++){
-         //read existing data from file
-        myFile = SD.open(String(id));
-        String command = "";
-        char character;
-        if (myFile) {
-	    firstUser = false;
-            // read from the file until there's nothing else in it:
-            while (myFile.available()) {
-                character = myFile.read();
-                command += character;
-            }
-            // close the file:
-            myFile.close();
-        } else {
-            break; //no file found, end of user search..
-        }
-        
-        if(command == "") continue; //goto next user
-        
-        //fast search by string.indexOf(), jump over if not in string
-        if(command.indexOf(charUid) == -1) continue;
-	else{
-		userFound = true;
-		break;
-	}
-    }
-    
-    String fileName = String(id);
-    char charFile[fileName.length() + 1];
-    fileName.toCharArray(charFile, fileName.length() + 1);
-    SD.remove(charFile); //rewrite file if user exists
-    if(firstUser)
-	id = 0;
+     
+    String fileName = String(charUid);
+    SD.remove(fileName); //rewrite file if user exists
 	    
-    myFile = SD.open(String(id), FILE_WRITE);
+    myFile = SD.open(fileName, FILE_WRITE);
     // if the file opened okay, write to it:
     if (myFile && sdStatus) {
         Serial.print("Writing uid file");
