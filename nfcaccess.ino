@@ -40,7 +40,8 @@
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);        // Create MFRC522 instance.
 
-SdFat SD(1);
+//d4 = miso, d5 = mosi, d3 = sck
+SdFatSoftSpi<D4, D5, D3> SD;
 File myFile;
 MFRC522::MIFARE_Key key;
 
@@ -80,7 +81,7 @@ void setup() {
 	mfrc522.PCD_Init();        // Init MFRC522 card
 	
 	// Initialize SOFTWARE SPI, save status of sd init for later
-    if (!SD.begin(SD_CS)) {
+    if (!SD.begin(SD_CS, SPI_FULL_SPEED)) {
         Serial.println("initialization failed!");
         sdStatus = false;	
     }else{
