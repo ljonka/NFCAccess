@@ -179,9 +179,9 @@ Example - allow uid "_123_123_123_123" access each day, Filename: "_123_123_123_
 The "t" Param stands for "Access Time", 1 = allow, 0 = permit. One Value for each weekday, starting on Sunday.
 
 <h3>Insert user from cloud</h3>
-Send the json over cloud with following command:
+Send the json over cloud with the following command:
 <pre>
-particle call <your-device-id> updateKey '{"u":"_123_123_123_123", "t":[1,1,1,1,1,1,1]}'
+particle call your-device-id updateKey '{"u":"_123_123_123_123", "t":[1,1,1,1,1,1,1]}'
 </pre>
 
 This should create a file naming "_123_123_123_123" on SDCard and set the rights as requested.
