@@ -168,6 +168,23 @@ git submodule update --init --recursive
 	
 </ul>
 
+<h2>Managing users</h2>
+Users are created on files with name equal to rfid uid, hold your card on the reader and look in log file on sd card for available uid's. To allow acces for specific uid create a simple text file with the following content (its json): 
+
+Example - allow uid "_123_123_123_123" access each day, Filename: "_123_123_123_123" in SDCard's Root Directory
+<pre>
+{"u":"_123_123_123_123", "t":[1,1,1,1,1,1,1]}
+</pre>
+
+The "t" Param stands for "Access Time", 1 = allow, 0 = permit. One Value for each weekday, starting on Sunday.
+
+<h3>Insert user from cloud</h3>
+Send the json over cloud with following command:
+<pre>
+particle call <your-device-id> updateKey '{"u":"_123_123_123_123", "t":[1,1,1,1,1,1,1]}'
+</pre>
+
+This should create a file naming "_123_123_123_123" on SDCard and set the rights as requested.
 
 
 
