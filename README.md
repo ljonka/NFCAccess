@@ -11,8 +11,6 @@ particle login
 <h2>Installation</h2>
 <pre>
 git clone https://github.com/ljonka/NFCAccess.git
-cd NFCAccess
-git submodule update --init --recursive
 </pre>
 
 <h2>Compile or flash for particle photon</h2>
@@ -20,7 +18,7 @@ git submodule update --init --recursive
 <h3>Compile and download bin</h3>
 <pre>particle compile photon .</pre>
 
-<h3>Compile and flash</h3> 
+<h3>Compile and flash</h3>
 <pre>particle flash <device id> .</pre>
 
 <h2>Wiring</h2>
@@ -162,14 +160,14 @@ git submodule update --init --recursive
 	<li>Particle Photon STM32F2</li>
 	<li>RFID-RF522 MFRC522</li>
 	<li>MicroSD Card Adapter Catalex</li>
-	<li>Taster</li>	
-	<li>Relais Module SRD-05VDC-SL-C</li>	
+	<li>Taster</li>
+	<li>Relais Module SRD-05VDC-SL-C</li>
 	<li>1,5MOhm Resistor</li>
-	
+
 </ul>
 
 <h2>Managing users</h2>
-Users are created on files with name equal to rfid uid, hold your card on the reader and look in log file on sd card for available uid's. To allow acces for specific uid create a simple text file with the following content (its json): 
+Users are created on files with name equal to rfid uid, hold your card on the reader and look in log file on sd card for available uid's. To allow acces for specific uid create a simple text file with the following content (its json):
 
 Example - allow uid "_123_123_123_123" access each day, Filename: "_123_123_123_123" in SDCard's Root Directory
 <pre>
@@ -185,6 +183,3 @@ particle call your-device-id updateKey '{"u":"_123_123_123_123", "t":[1,1,1,1,1,
 </pre>
 
 This should create a file naming "_123_123_123_123" on SDCard and set the rights as requested.
-
-
-

@@ -1,9 +1,0 @@
-[submodule "lib/MFRC522_RFID_Library"]
-	path = lib/MFRC522_RFID_Library
-	url = https://github.com/pkourany/MFRC522_RFID_Library.git
-[submodule "lib/SparkJson"]
-	path = lib/SparkJson
-	url = https://github.com/menan/SparkJson.git
-[submodule "lib/SdFat-Particle"]
-	path = lib/SdFat-Particle
-	url = https://github.com/greiman/SdFat-Particle.git
