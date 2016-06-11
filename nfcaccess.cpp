@@ -21,6 +21,7 @@
 
 #include "application.h"
 
+//this include command compile only on particle-cli, to make it work on atom, remove the folder
 #include "SparkJson/SparkJson.h" //json lib
 #include "SdFat/SdFat.h" //sd-card lib
 #include "MFRC522/MFRC522.h" //rfid lib
